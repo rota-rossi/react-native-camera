@@ -206,16 +206,8 @@ export default class Camera extends Component {
 
   _onBarCodeRead = (data) => {
     if (this.props.onBarCodeRead) {
-      if (this.props.millisecondDelayBetweenScans) {
-        this.componentWillUnmount()
-        this.props.onBarCodeRead(data)
-        setTimeout(() => {
-          this.componentWillMount()
-        }, this.props.millisecondDelayBetweenScans)
-      } else {
-        this.props.onBarCodeRead(data)
-      }
-
+      this._removeOnBarCodeReadListener()
+      this.props.onBarCodeRead(data)
     }
   };
 
